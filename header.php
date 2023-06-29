@@ -13,13 +13,14 @@
 
 <header class="nav-container">
     <div class="logo">
-        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo.png'?>" alt="Logo">
+        <img src="<?php echo get_template_directory_uri() . '/assets/images/logo.png'?>" alt="Logo">
     </div>    
     <nav class="navigation">
         <?php wp_nav_menu([
         'theme_location' => 'header',
         'container' => false,
         'menu_class' => 'nav-menu',
+        'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li class="contact-btn">Contact</li></ul>'
     ])
     ?>
     </nav>
