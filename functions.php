@@ -2,10 +2,12 @@
 function theme_enqueue_scripts() {
     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
     wp_enqueue_style('parent-style');
+    wp_register_script('contact-script', get_template_directory_uri() . '/assets/js/contact.js', array(), '1.0', true);
+    wp_enqueue_script('contact-script');
 }
 
 
-function nathalie_theme_supports(){
+function nathalie_theme_supports() {
     add_theme_support('title-tag');
     add_theme_support('menus');
     register_nav_menu('header', 'En tête du menu');
