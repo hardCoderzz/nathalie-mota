@@ -83,9 +83,9 @@ get_header();
                     $next_post = get_next_post();
 
                     if ($previous_post) {
-                        echo '<a href="' . get_permalink($previous_post) . '" class="previous-thumbnail-link">' . get_the_post_thumbnail($previous_post->ID, 'thumbnail', array('class' => 'previous-thumbnail')) . '</a>';
+                        echo get_the_post_thumbnail($previous_post->ID, 'thumbnail', array('class' => 'previous-thumbnail'));
                     } elseif ($next_post) {
-                        echo '<a href="' . get_permalink($next_post) . '" class="next-thumbnail-link">' . get_the_post_thumbnail($next_post->ID, 'thumbnail', array('class' => 'next-thumbnail')) . '</a>';
+                        echo get_the_post_thumbnail($next_post->ID, 'thumbnail', array('class' => 'next-thumbnail'));
                     } else {
                         echo get_the_post_thumbnail(get_the_ID(), 'thumbnail');
                     }
