@@ -76,12 +76,33 @@ get_header();
         </div>
     </div>
     <div class="arrow-container">
-        <div class="arrows-wrapper">
-            <div class="thumbnail-box">
-                <?php
+        <div class="arrows">
+            <div class="arrow-wrapper">
+                <div class="arrow-left">
+                    <?php
                     $previous_post = get_previous_post();
                     $next_post = get_next_post();
 
+                    if ($previous_post) {
+                        $previous_post_link = get_permalink($previous_post);
+                        echo '<a href="' . $previous_post_link . '"><img src="' . get_template_directory_uri() . '/assets/images/arrow-left.png" alt="Arrow left"></a>';
+                    }
+                    ?>
+                </div>
+                <div class="arrow-right">
+                    <?php
+
+                    if ($next_post) {
+                        $next_post_link = get_permalink($next_post);
+                        echo '<a href="' . $next_post_link . '"><img src="' . get_template_directory_uri() . '/assets/images/arrow-right.png" alt="Arrow right"></a>';
+                    } else {
+                        echo '<img src="' . get_template_directory_uri() . '/assets/images/arrow-right.png" alt="Arrow right">';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="thumbnail-box">
+                <?php
                     if ($previous_post) {
                         echo get_the_post_thumbnail($previous_post->ID, 'thumbnail', array('class' => 'previous-thumbnail'));
                     } elseif ($next_post) {
@@ -90,29 +111,6 @@ get_header();
                         echo get_the_post_thumbnail(get_the_ID(), 'thumbnail');
                     }
                 ?>
-            </div>
-            <div class="arrows">
-                <div class="arrow-wrapper">
-                    <div class="arrow-left">
-                        <?php
-                        $previous_post = get_previous_post();
-                        // var_dump($previous_post);
-                        if ($previous_post) {
-                            $previous_post_link = get_permalink($previous_post);
-                            echo '<a href="' . $previous_post_link . '"><img src="' . get_template_directory_uri() . '/assets/images/arrow-left.png" alt="Arrow left"></a>';
-                        }
-                        ?>
-                    </div>
-                    <div class="arrow-right">
-                        <?php
-                        $next_post = get_next_post();
-                        if ($next_post) {
-                            $next_post_link = get_permalink($next_post);
-                            echo '<a href="' . $next_post_link . '"><img src="' . get_template_directory_uri() . '/assets/images/arrow-right.png" alt="Arrow right"></a>';
-                        }
-                        ?>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
