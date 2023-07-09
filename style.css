@@ -20,6 +20,15 @@ Theme Name : nathalie-mota
     --clr-primary-red: #E00000;
     --clr-secondary-red: #FE5858;
     --clr-light-red: #FFD6D6;
+
+    --step--2: clamp(0.56rem, calc(0.84rem + -0.32vw), 0.78rem);
+    --step--1: clamp(0.70rem, calc(1.01rem + -0.34vw), 0.94rem);
+    --step-0: clamp(0.88rem, calc(1.20rem + -0.36vw), 1.13rem);
+    --step-1: clamp(1.09rem, calc(1.42rem + -0.37vw), 1.35rem);
+    --step-2: clamp(1.37rem, calc(1.69rem + -0.36vw), 1.62rem);
+    --step-3: clamp(1.71rem, calc(2.01rem + -0.34vw), 1.94rem);
+    --step-4: clamp(2.14rem, calc(2.39rem + -0.28vw), 2.33rem);
+    --step-5: clamp(2.67rem, calc(2.84rem + -0.18vw), 2.80rem);
 }
 
 * {
@@ -27,19 +36,35 @@ Theme Name : nathalie-mota
     padding: 0;
     text-decoration: none;
     list-style: none;
+    box-sizing: border-box;
+}
+
+body {
+    /* width: 1440px; */
+    margin: auto;
 }
 
 /* HEADER */
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 80px;
+    background-color: #fff;
+    box-shadow: 0px 4px 14px 10px #00000008;
+
 }
 
-.navigation {
+.nav-wrapper,
+.secondary-container {
+    padding-inline: 1em;
+}
+
+.nav-wrapper {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-menu {
@@ -186,4 +211,177 @@ textarea {
 .wpcf7-response-output {
     font-family: var(--font-poppins);
     font-size: 0.75rem;
+}
+
+/* SINGLE PAGE STYLE */
+
+
+
+.container {
+    width: 1440px;
+    margin: auto;
+    padding: 1em 1em 0 1em;
+    font-family: var(--font-space);
+    text-transform: uppercase;
+}
+
+.container,
+.nav-wrapper,
+.secondary-container,
+.related-posts {
+    width: 1440px;
+    margin: auto;
+}
+
+.wrapper,
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    column-gap: 1%
+}
+
+.photo-info-box,
+.image-post,
+.photo-contact-wrapper {
+    width: 50%;
+}
+
+.photo-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.photo-info-box p {
+    font-size: var(--step-1);
+    line-height: 2rem;
+}
+
+.photo-info-box :nth-child(6) {
+    margin-bottom: 1.5rem;
+}
+
+.separator {
+    height: 2px;
+    background-color: var(--clr-dark-grey);
+}
+
+.image-post {
+    height: calc(100vh - 198px);
+}
+
+.image-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-contact-wrapper {
+    width: 50%;
+    padding-block: 1em;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2%;
+    width: 50%;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.photo-contact-wrapper p,
+.contact-single-btn {
+    font-family: var(--font-poppins);
+    font-size: var(--step-0);
+}
+
+
+.contact-single-btn {
+    font-size: var(--step-0);
+    border: none;
+    width: 18.5em;
+    padding-block: 1em;
+    cursor: pointer;
+
+}
+
+.secondary-container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1%;
+    /* height: 7.375em; */
+    /* border-bottom: solid 1px var(--clr-dark); */
+}
+
+.arrows {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.arrow-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.previous-thumbnail {
+    opacity: 0;
+    width: 81px;
+    height: 71px;
+    margin-top: 0.5em;
+}
+
+.previous-thumbnail img,
+.next-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.arrow-left:hover~.thumbnail-box .previous-thumbnail {
+    opacity: 1;
+}
+
+
+
+/* .related-posts {
+    height: 100vh;
+} */
+
+.related-posts-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100vh - 400px);
+    gap: 1%;
+    padding-inline: 1em;
+}
+
+.related-post {
+    width: 50%;
+    /* overflow: hidden; */
+}
+
+.related-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-posts h2 {
+    font-family: var(--font-space);
+    font-size: var(--font-h3);
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 1em;
 }
