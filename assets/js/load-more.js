@@ -1,89 +1,49 @@
-// const loadMore = document.getElementById('load-more');
-// const photosList = document.querySelector('.photos-wrapper');
-
-// let currentPage = 1;
-// const existingPostElements = document.querySelectorAll('.related-post');
-// const loadedCount = existingPostElements.length;
-
-// loadMore.addEventListener('click', async () => {
-//     currentPage++;
-//     fetch('http://localhost/Projet-11/wp-admin/admin-ajax.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//         body: new URLSearchParams({
-//             action: 'photos_load_more',
-//             paged: currentPage,
-//         }),
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.text();
-//             } else {
-//                 throw new Error('La requête a échoué');
-//             }
-//         })
-//         .then(res => {
-//             photosList.insertAdjacentHTML('beforeend', res);
-
-//             const newPostElements = document.querySelectorAll('.related-post');
-//             const loadedCount = newPostElements.length;
-
-//             if (loadedCount >= 12) {
-//                 // loadMore.style.opacity = '0';
-//                 // loadMore.style.pointerEvents = 'none';
-//                 loadMore.parentNode.remove();
-//                 photosList.classList.add('no-more-photo');
-//             }
-//         })
-//         .catch(error => {
-//             console.error(error);
-//         });
-// });
-
-const loadMore = document.getElementById('load-more');
-const photosList = document.querySelector('.photos-wrapper');
-
 let currentPage = 1;
-let totalPosts = null;
+let selectedCategory;
 
-loadMore.addEventListener('click', async () => {
+jQuery('.category-list li').on('click', function () {
+    currentPage = 1;
+    selectedCategory = jQuery(this).data('category');
+    loadMorePosts(true); // true indique qu'il s'agit d'un nouveau chargement de catégorie
+});
+
+jQuery('#load-more').on('click', function () {
     currentPage++;
-    fetch('http://localhost/Projet-11/wp-admin/admin-ajax.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
+    loadMorePosts();
+});
+
+function loadMorePosts(isNewCategory = false) {
+    let sortOrder;
+    if (document.querySelector('.sort-order h3').innerHTML != 'Trier') {
+        sortOrder = document.querySelector('.sort-order h3').innerHTML.toUpperCase();
+    }
+
+    jQuery.ajax({
+        type: 'POST',
+        url: 'http://localhost/Projet-11/wp-admin/admin-ajax.php',
+        dataType: 'json',
+        data: {
             action: 'photos_load_more',
             paged: currentPage,
-        }),
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
+            category: selectedCategory,
+            sortOrder: sortOrder ? sortOrder : 'DESC',
+        },
+        success: function (res) {
+            if (isNewCategory || currentPage === 1) {
+                jQuery('.photos-wrapper').html(res.html);
             } else {
-                throw new Error('La requête a échoué');
-            }
-        })
-        .then(res => {
-            photosList.insertAdjacentHTML('beforeend', res);
-            const newPostElements = document.querySelectorAll('.related-post');
-            const loadedCount = newPostElements.length;
-
-            if (totalPosts === null) {
-                totalPosts = parseInt(res); // Récupère le nombre total de posts de la réponse
-                console.log(totalPosts);
+                jQuery('.photos-wrapper').append(res.html);
             }
 
-
-            if (loadedCount >= 12 || loadedCount >= totalPosts) {
-                loadMore.parentNode.remove();
-                photosList.classList.add('no-more-photo');
+            const currentDisplayedPosts = jQuery('.photos-wrapper').children().length;
+            console.log('post en cours', currentDisplayedPosts)
+            console.log('total post reponse: ', res.total_posts)
+            if (currentDisplayedPosts >= res.total_posts) {
+                jQuery('#load-more').hide();
+                jQuery('.btn__wrapper').css('margin-bottom', '0');
+            } else {
+                jQuery('#load-more').show();
             }
-        })
-        .catch(error => {
-            console.error(error);
-        });
-});
+        }
+    });
+}

@@ -1,15 +1,25 @@
 const contactLinks = document.querySelectorAll('.contact-btn, .contact-single-btn');
 const overlay = document.querySelector('.popup');
 const popup = document.querySelector('.popup-content');
-const form = document.querySelector('.wpcf7');
+const photoReferenceInput = document.querySelector('#photo-reference .wpcf7-form-control');
+const postRef = document.querySelector('.post-ref');
 
 contactLinks.forEach((contactLink) => {
     contactLink.addEventListener('click', () => {
+        if (postRef) {
+            const photoRef = postRef.textContent.replace('Référence : ', '');
+
+            if (photoRef) {
+                photoReferenceInput.value = photoRef;
+                console.log(photoRef);
+            }
+        }
+
         overlay.classList.add('open');
     });
 });
 
-form.addEventListener('click', (event) => {
+popup.addEventListener('click', (event) => {
     event.stopPropagation();
 });
 

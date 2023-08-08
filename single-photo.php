@@ -58,7 +58,6 @@ get_header();
                     ?>
                     <p>Année : <?php echo get_the_date('Y'); ?></p>
 
-                    <div class="separator"></div>
         </div>
         <div class="image-post">
             <?php the_post_thumbnail(); ?>

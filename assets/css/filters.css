@@ -1,0 +1,176 @@
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 100%;
+    margin: auto;
+    /* padding-inline: 0.5em; */
+    padding-top: 3em;
+    padding-bottom: 2em;
+    gap: 4%;
+
+
+}
+
+
+.filters-wrapper,
+.category,
+.format,
+.sort-order {
+    display: flex;
+}
+
+.filters-wrapper {
+
+    gap: 2%;
+}
+
+.category,
+.format,
+.sort-order {
+    width: 16.25em;
+    max-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px var(--clr-light-grey);
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+.filter-section h3,
+.category-list,
+.format-list,
+.sort-order-list {
+    font-family: var(--font-poppins);
+    font-size: var(--font-paragraph);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.filter,
+.sort-filter {
+    position: relative;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+
+.category-list,
+.format-list,
+.sort-order-list {
+    position: absolute;
+    max-height: 0;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    line-height: 2.2;
+    background-color: #fff;
+    border: 1px solid var(--clr-light-grey);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.7s ease, opacity 0.5s ease, transform 0.5s ease;
+
+}
+
+.format-list.open,
+.category-list.open,
+.sort-order-list.open {
+    max-height: fit-content;
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.chevron-categories,
+.chevron-format,
+.chevron-sort,
+.category-list li,
+.format-list li,
+.sort-order-list li {
+    cursor: pointer;
+}
+
+.chevron-categories,
+.chevron-format,
+.chevron-sort {
+    transition: all 0.7s ease 0s;
+
+}
+
+.category-list li,
+.format-list li,
+.sort-order-list li {
+    padding-left: 0.5em;
+
+}
+
+.category-list li:hover,
+.format-list li:hover,
+.sort-order-list li:hover {
+    background-color: var(--clr-secondary-red);
+    color: #fff;
+    font-weight: 700;
+
+}
+
+@media (max-width: 850px) {
+
+    .category,
+    .format,
+    .sort-order {
+        width: 11em;
+        padding: 0.5em;
+    }
+
+}
+
+@media (max-width: 584px) {
+
+    .category,
+    .format,
+    .sort-order {
+        width: 9em;
+    }
+
+    .filter-section h3,
+    .category-list,
+    .format-list,
+    .sort-order-list {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .category,
+    .format,
+    .sort-order {
+        width: 7.5em;
+    }
+
+    .filter-section h3,
+    .category-list,
+    .format-list,
+    .sort-order-list {
+        font-size: 0.8rem;
+    }
+
+}
+
+@media (max-width: 410px) {
+
+    .category,
+    .format,
+    .sort-order {
+        width: 6.5em;
+    }
+}
+
+@media (max-width: 355px) {
+    .sort-order {
+        width: 4em;
+    }
+}
