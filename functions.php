@@ -23,8 +23,6 @@ function theme_enqueue_scripts()
     wp_enqueue_style('mobile-menu-style');
     wp_register_style('lightbox-style', get_template_directory_uri() . '/assets/css/lightbox.css');
     wp_enqueue_style('lightbox-style');
-    wp_register_style('responsive-style', get_template_directory_uri() . '/assets/css/responsive.css');
-    wp_enqueue_style('responsive-style');
     wp_register_style('parent-style', get_template_directory_uri() . '/style.css');
     wp_enqueue_style('parent-style');
 }
@@ -107,11 +105,9 @@ function filter_posts()
 {
     $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 12;
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-    // $order = isset($_POST['sortOrder']) && in_array($_POST['sortOrder'], ['asc', 'desc']) ? sanitize_text_field($_POST['sortOrder']) : 'DESC'; //remplacé ASC par DESC le 07/08
-    // $args['order'] = $order;
+    $order = isset($_POST['sortOrder']) && in_array($_POST['sortOrder'], ['asc', 'desc']) ? sanitize_text_field($_POST['sortOrder']) : 'DESC';
+    $args['order'] = $order;
 
-    // var_dump($posts_per_page);
-    // var_dump($paged);
 
     $args = array(
         'post_type'      => 'photo',
@@ -177,7 +173,7 @@ add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
  * This replaces the WordPress `wp_ob_end_flush_all()` function
  * with a replacement that doesn't cause PHP notices.
  */
-// remove_action('shutdown', 'wp_ob_end_flush_all', 1);
-// add_action('shutdown', function () {
-//     while (@ob_end_flush());
-// });
+remove_action('shutdown', 'wp_ob_end_flush_all', 1);
+add_action('shutdown', function () {
+    while (@ob_end_flush());
+});

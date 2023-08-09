@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function openLightbox() {
-        console.log("Tentative d'ouverture de la lightbox");
         images = document.querySelectorAll('.related-post');
 
         const currentImage = images[currentImageIndex];

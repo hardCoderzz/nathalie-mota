@@ -75,7 +75,7 @@ function updatePhotos() {
     document.querySelector('.format h3').innerHTML =
         formatSlug.length > 0 ? formatSlug : 'Format'
     document.querySelector('.sort-order h3').innerHTML =
-        sortOrderValue.length > 0 ? sortOrderValue : 'Trier par'
+        sortOrderValue.length > 0 ? sortOrderValue : 'Trier'
 
     sendFetchRequest(categorySlug, formatSlug, sortOrderValue);
 }
