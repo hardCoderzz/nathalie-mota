@@ -11,7 +11,6 @@ contactLinks.forEach((contactLink) => {
 
             if (photoRef) {
                 photoReferenceInput.value = photoRef;
-                console.log(photoRef);
             }
         }
 

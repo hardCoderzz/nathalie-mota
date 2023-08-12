@@ -57,12 +57,13 @@ function photos_load_more()
     );
 
     if ($category) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'ctg',
-                'field'    => 'slug',
-                'terms'    => $category,
-            ),
+        if (!isset($args['tax_query'])) {
+            $args['tax_query'] = array();
+        }
+        $args['tax_query'][] = array(
+            'taxonomy' => 'ctg',
+            'field'    => 'slug',
+            'terms'    => $category,
         );
     }
 
