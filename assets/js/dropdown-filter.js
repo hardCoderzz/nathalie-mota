@@ -31,7 +31,6 @@ if (chevronCategories || chevronFormat || chevronSort != null) {
             handleLinkClick(categoryLinks, link, chevronCategories, categories);
         });
     });
-
 }
 
 formatLinks.forEach(link => {
@@ -51,6 +50,19 @@ document.querySelectorAll('.category-list li').forEach(item => {
     item.addEventListener('click', () => {
 
         const prevActive = document.querySelector('.category-list li.active');
+        if (prevActive) {
+            prevActive.classList.remove('active');
+        }
+        item.classList.add('active');
+
+        updatePhotos();
+    });
+});
+
+document.querySelectorAll('.sort-order-list li').forEach(item => {
+    item.addEventListener('click', () => {
+
+        const prevActive = document.querySelector('.sort-order-list li.active');
         if (prevActive) {
             prevActive.classList.remove('active');
         }
@@ -95,14 +107,14 @@ function sendFetchRequest(category, format, sortOrder) {
     })
         .then(response => {
             if (response.ok) {
-                return response.text();
+                return response.json();
             } else {
                 throw new Error('La requête a échoué');
             }
         })
-        .then(res => {
+        .then(data => {
             const photosList = document.querySelector('.photos-wrapper');
-            const data = JSON.parse(res);
+            // const data = JSON.parse(res);
             photosList.innerHTML = data.html;
         })
         .catch(error => {

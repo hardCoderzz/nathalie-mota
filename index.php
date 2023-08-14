@@ -101,7 +101,6 @@ if ($photos_query->have_posts()) :
         <div class="photos-wrapper">
             <?php
             while ($photos_query->have_posts()) : $photos_query->the_post();
-                // $categories = wp_get_post_terms(get_the_ID(), 'ctg');
             ?>
                 <?php get_template_part('template-parts/content/photos'); ?>
             <?php

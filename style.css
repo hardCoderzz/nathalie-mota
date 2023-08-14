@@ -365,6 +365,7 @@ textarea {
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;
+        margin-block: 1.5em;
     }
 }
 
@@ -596,7 +597,7 @@ HERO SECTION
 }
 
 .random-image {
-    height: calc(100vh - 24px);
+    height: 100%;
 }
 
 .random-image img {
